@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', function () {
+    return view('sessions.create');
+});
+Route::post('login', [\App\Http\Controllers\SessionsController::class, 'store']);
+Route::get('register', [\App\Http\Controllers\WebRegisterController::class, 'create']);
+Route::post('register', [\App\Http\Controllers\WebRegisterController::class, 'store']);
+Route::post('logout', [\App\Http\Controllers\SessionsController::class, 'destroy']);
