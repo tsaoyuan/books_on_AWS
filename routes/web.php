@@ -26,6 +26,6 @@ Route::post('logout', [\App\Http\Controllers\SessionsController::class, 'destroy
 
 // GitHub OAuth 第三方登入
 Route::prefix('auth')->group(function (){
-    Route::get('/redirect',[\App\Http\Controllers\ThirdPartyAuthController::class, 'redirectToProvider']);
-    Route::get('/callback',[\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
+    Route::get('/github',[\App\Http\Controllers\ThirdPartyAuthController::class, 'redirectToProvider']);
+    Route::get('/github/callback',[\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
 });
