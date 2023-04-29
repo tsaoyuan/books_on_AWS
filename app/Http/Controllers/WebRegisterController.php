@@ -16,21 +16,29 @@ class WebRegisterController extends Controller
 
     public function store()
     {
-        $attributes = request()->validate([
-            'name' => 'required|max:255|min:3',
-            'email' => 'required|email|min:5|max:255',
-            'password' => 'required|max:255|min:6|confirmed'
-        ]);
+        try {
+            //code...
+            $attributes = request()->validate([
+                'name' => 'required|max:255|min:3',
+                'email' => 'required|email|min:5|max:255',
+                'password' => 'required|max:255|min:6|confirmed'
+            ]);
+    
+            abort_if(
+                User::where('email', $attributes['email'])->first(),
+                \Illuminate\Http\Response::HTTP_BAD_REQUEST,
+                'email已經註冊'
+            );
+            $user = User::create(
+                array_merge(
+                   $attributes,  ['password' => Hash::make($attributes['password'])]
+                ));
 
-        abort_if(
-            User::where('email', $attributes['email'])->first(),
-            \Illuminate\Http\Response::HTTP_BAD_REQUEST,
-            'email已經註冊'
-        );
-        $user = User::create(
-            array_merge(
-               $attributes,  ['password' => Hash::make($attributes['password'])]
-            ));
+        } catch (\Throwable $exception) {
+            //throw $exception;
+            logger()->error('Something went wrong', ['exception' => $exception]);
+            dd($exception);
+        }
 
         auth()->login($user);
 

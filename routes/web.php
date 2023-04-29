@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\ThirdPartyAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,6 @@ Route::post('logout', [\App\Http\Controllers\SessionsController::class, 'destroy
 
 // GitHub OAuth 第三方登入
 Route::prefix('auth')->group(function (){
-    Route::get('/github',[\App\Http\Controllers\ThirdPartyAuthController::class, 'redirectToProvider']);
-    Route::get('/github/callback',[\App\Http\Controllers\ThirdPartyAuthController::class, 'handleProviderCallback']);
+    Route::get('/{provider}',[ThirdPartyAuthController::class, 'redirectToProvider']);
+    Route::get('/{provider}/callback',[ThirdPartyAuthController::class, 'handleProviderCallback']);
 });
