@@ -32,14 +32,17 @@ class ThirdPartyAuthController extends Controller
                 // 這裡使用 github_id 作為查詢欄位，如果資料庫已經有此id，則更新使用者資料
                 // 如果資料庫無此id，則新增此筆資料
                 // 各欄位要注意有沒有 $fillable，沒有的話寫不進去
-                'github_id' => $providerUser->id,
-            ], [
-                'name' => $providerUser->name,
+                // 'github_id' => $providerUser->id,
+
+                // //這邊用 email 當 key 值查詢
                 'email' => $providerUser->email,
+            ], [
+                'github_id' => $providerUser->id,
+                'name' => $providerUser->name,
                 'email_verified_at' => now(),
                 // laravel 文件有建這些欄位, 本範例只用 github_id 判斷使用者使用有無使用第三方登入
-                $provider.'_token' => $providerUser->token, // 文件有
-                $provider.'_refresh_token' => $providerUser->refreshToken,
+                // $provider.'_token' => $providerUser->token, // 文件有
+                // $provider.'_refresh_token' => $providerUser->refreshToken,
             ]);
         
             
