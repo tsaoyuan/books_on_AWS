@@ -14,9 +14,17 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
+    // protected $listen = [
+    //     Registered::class => [
+    //         SendEmailVerificationNotification::class,
+    //     ],
+    // ];
+
+    // 出處 laravel Socialite Providers 文件
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // ... other providers
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class.'@handle',
         ],
     ];
 

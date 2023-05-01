@@ -60,6 +60,7 @@
             </form>
             <div class=" flex items-center justify-center gap-x-4">
                 <a href="/auth/github" class="text-sm text-gray-500">Or login with Github <span aria-hidden="true">→</span></a>
+                <a href="/auth/facebook" class="text-sm text-gray-500">Or login with Facebook <span aria-hidden="true">→</span></a>
             </div>
         </div>
     </div>
