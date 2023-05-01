@@ -24,7 +24,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'role',
-        'github_id', // 使用者通過 GitHub OAuth 認證時，Laravel 可以將 github_id 儲存在使用者模型 
+        'github_id', // 使用者通過 GitHub OAuth 認證時，Laravel 可以將 github_id 儲存在使用者模型
+        'facebook_id', 
         'email_verified_at',
     ];
 
